@@ -1,3 +1,4 @@
+import platform
 import time
 import cpuinfo
 import numpy as np
@@ -28,6 +29,18 @@ def timeit(f, n=10):
     return stat_ts(ts)
 
 
+def system_info():
+    uname = platform.uname()
+    return {
+        "System": uname.system,
+        "Node Name": uname.node,
+        "Release": uname.release,
+        "Version": uname.version,
+        "Machine": uname.machine,
+        "Processor": uname.processor,
+    }
+
+
 def np_copy(nbytes):
     a = rand_array(nbytes)
     b = a.copy()
@@ -48,6 +61,7 @@ def np_float_sum(nbytes):
 
 
 result = dict()
+result["system"] = system_info()
 result["cpu"] = cpuinfo.get_cpu_info()
 result["numpy copy (small)"] = np_copy(1 << 18)
 result["numpy copy (large)"] = np_copy(1 << 27)
