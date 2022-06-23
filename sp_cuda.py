@@ -68,5 +68,6 @@ info["cuda runtime"] = get_cuda_runtime()
 info["cupy copy to devices"] = cp_copy_to_device(1 << 28)
 info["cupy copy from devices"] = cp_copy_from_device(1 << 28)
 info["cupy copy in devices"] = cp_copy_in_device(1 << 28)
-info["cupy copy between devices"] = cp_copy_between_device(1 << 28)
+if cp.cuda.runtime.getDeviceCount() >= 2:
+    info["cupy copy between devices"] = cp_copy_between_device(1 << 28)
 print(toml.dumps(info))
