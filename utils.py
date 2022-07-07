@@ -1,6 +1,12 @@
 import time
 from functools import lru_cache
 import numpy as np
+import string
+import random
+
+
+def rand_str(size=6, chars=string.ascii_uppercase + string.digits):
+   return ''.join(random.choice(chars) for _ in range(size))
 
 
 @lru_cache
