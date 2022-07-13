@@ -4,7 +4,6 @@ import platform
 import cpuinfo
 import numpy as np
 import toml
-# from utils import timeit, rand_array, rand_str
 import utils
 import h5py
 
