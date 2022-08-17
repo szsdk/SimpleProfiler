@@ -1,0 +1,3 @@
+[submodule "sci_benchmark/pybind11"]
+	path = sci_benchmark/pybind11
+	url = https://github.com/pybind/pybind11
