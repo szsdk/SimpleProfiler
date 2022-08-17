@@ -23,10 +23,13 @@ def stat_ts(ts):
     }
 
 
-def timeit(f, n=10):
+def timeit(f, n=10, time_points=False):
     ts = []
     for i in range(n):
         t0 = time.perf_counter()
         f()
         ts.append(time.perf_counter() - t0)
-    return stat_ts(ts)
+    ans = stat_ts(ts)
+    if not time_points:
+        ans.pop("time points(s)")
+    return ans
