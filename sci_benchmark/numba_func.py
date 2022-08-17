@@ -1,14 +1,10 @@
-import cython
-from libc.stdlib cimport malloc, free
+import numpy as np
+import numba
 
 
-@cython.wraparound(False)
-@cython.cdivision(True)
-@cython.boundscheck(False)
-def primes(int nb_primes):
-    cdef int n, i, len_p
-    cdef int *p = <int *> malloc(nb_primes * sizeof(int))
-    cdef int upper
+@numba.jit(boundscheck=False)
+def primes(nb_primes):
+    p = np.empty(nb_primes, np.int32)
 
     len_p = 0  # The current number of elements in p.
     n = 2
@@ -29,10 +25,4 @@ def primes(int nb_primes):
             p[len_p] = n
             len_p += 1
         n += 1
-
-    # Let's return the result in a python list:
-    result_as_list  = [prime for prime in p[:len_p]]
-    free(p)
-    return result_as_list
-
-
+    return p

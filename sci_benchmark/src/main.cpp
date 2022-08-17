@@ -30,6 +30,6 @@ std::vector<int> primes(int nb_primes) {
     return p;
 }
 
-PYBIND11_MODULE(pybind_func, m) {
+PYBIND11_MODULE(pybind11_func, m) {
     m.def("primes", &primes);
 }

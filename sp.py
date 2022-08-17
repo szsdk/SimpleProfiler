@@ -41,12 +41,11 @@ def np_float_sum(nbytes):
 
 def h5_IO(nbytes):
     a = utils.rand_array(nbytes)
-    result = {
-        "array size (MB)": nbytes * 1e-6
-    }
+    result = {"array size (MB)": nbytes * 1e-6}
     with tempfile.NamedTemporaryFile(dir=Path(), suffix=".h5") as f:
         with h5py.File(f.name, "w") as fp:
-            info = utils.timeit(lambda: fp.create_dataset(utils.rand_str(), data=a), n=10)
+            info = utils.timeit(
+                lambda: fp.create_dataset(utils.rand_str(), data=a), n=10)
             info.pop("time points(s)")
         result["writing speed (GB/s)"] = nbytes * 1e-9 / info['mean(s)']
         with h5py.File(f.name, "r") as fp:
@@ -56,6 +55,20 @@ def h5_IO(nbytes):
         result["reading speed (GB/s)"] = nbytes * 1e-9 / info['mean(s)']
     return result
 
+
+def prime_benchmark(nb_primes, method: str):
+    if method == "pybind11":
+        from sci_benchmark.pybind11_func import primes
+    elif method == "cython":
+        from sci_benchmark.cython_func import primes
+    elif method == "numba":
+        from sci_benchmark.numba_func import primes
+        primes(20)  # warmup
+
+    info = utils.timeit(lambda: primes(nb_primes))
+    info["number of primes"] = nb_primes
+    info["method"] = method
+    return info
 
 
 result = dict()
@@ -67,4 +80,7 @@ result["numpy float sum (small)"] = np_float_sum(1 << 18)
 result["numpy float sum (large)"] = np_float_sum(1 << 27)
 result["HDF5 IO (small)"] = h5_IO(1 << 18)
 result["HDF5 IO (large)"] = h5_IO(1 << 27)
+result["pybind11 primes"] = prime_benchmark(300000, "pybind11")
+result["cython primes"] = prime_benchmark(300000, "cython")
+result["numba primes"] = prime_benchmark(300000, "numba")
 print(toml.dumps(result))
