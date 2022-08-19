@@ -1,11 +1,25 @@
+import logging
+from rich.logging import RichHandler
+from rich.progress import Progress
 from pathlib import Path
 import tempfile
 import platform
-import cpuinfo
 import numpy as np
 import toml
 import utils
-import h5py
+
+
+FORMAT = "%(message)s"
+logging.basicConfig(
+    level="INFO", format=FORMAT, datefmt="[%X]", handlers=[RichHandler()]
+)
+
+def cpu_info():
+    try:
+        import cpuinfo
+    except ImportError:
+        logging.warning("Cannot import cpuinfo.")
+    return cpuinfo.get_cpu_info()
 
 
 def system_info():
@@ -38,6 +52,11 @@ def np_float_sum(nbytes):
 
 
 def h5_IO(nbytes):
+    try:
+        import h5py
+    except ImportError:
+        logging.warning("Cannot import h5py")
+        return
     a = utils.rand_array(nbytes)
     result = {"array size (MB)": nbytes * 1e-6}
     with tempfile.NamedTemporaryFile(dir=Path(), suffix=".h5") as f:
@@ -53,13 +72,17 @@ def h5_IO(nbytes):
 
 
 def prime_benchmark(nb_primes, method: str):
-    if method == "pybind11":
-        from sci_benchmark.pybind11_func import primes
-    elif method == "cython":
-        from sci_benchmark.cython_func import primes
-    elif method == "numba":
-        from sci_benchmark.numba_func import primes
-        primes(20)  # warmup
+    try:
+        if method == "pybind11":
+            from sci_benchmark.pybind11_func import primes
+        elif method == "cython":
+            from sci_benchmark.cython_func import primes
+        elif method == "numba":
+            from sci_benchmark.numba_func import primes
+            primes(20)  # warmup
+    except ImportError:
+        logging.warning(f"Cannot import sci_benchmark {method}")
+        return
 
     info = utils.timeit(lambda: primes(nb_primes))
     info["number of primes"] = nb_primes
@@ -68,15 +91,28 @@ def prime_benchmark(nb_primes, method: str):
 
 
 result = dict()
-result["system"] = system_info()
-result["cpu"] = cpuinfo.get_cpu_info()
-result["numpy copy (small)"] = np_copy(1 << 18)
-result["numpy copy (large)"] = np_copy(1 << 27)
-result["numpy float sum (small)"] = np_float_sum(1 << 18)
-result["numpy float sum (large)"] = np_float_sum(1 << 27)
-result["HDF5 IO (small)"] = h5_IO(1 << 18)
-result["HDF5 IO (large)"] = h5_IO(1 << 27)
-result["pybind11 primes"] = prime_benchmark(300000, "pybind11")
-result["cython primes"] = prime_benchmark(300000, "cython")
-result["numba primes"] = prime_benchmark(300000, "numba")
+with Progress() as progress:
+    task1 = progress.add_task("", total=None)
+    progress.update(task1, advance=1, description="system info")
+    result["system"] = system_info()
+    progress.update(task1, advance=1, description="cpu info")
+    result["cpu"] = cpu_info()
+    progress.update(task1, advance=1, description="numpy copy (small)")
+    result["numpy copy (small)"] = np_copy(1 << 18)
+    progress.update(task1, advance=1, description="numpy copy (large)")
+    result["numpy copy (large)"] = np_copy(1 << 27)
+    progress.update(task1, advance=1, description="numpy float sum (small)")
+    result["numpy float sum (small)"] = np_float_sum(1 << 18)
+    progress.update(task1, advance=1, description="numpy float sum (large)")
+    result["numpy float sum (large)"] = np_float_sum(1 << 27)
+    progress.update(task1, advance=1, description="HDF5 IO (small)")
+    result["HDF5 IO (small)"] = h5_IO(1 << 18)
+    progress.update(task1, advance=1, description="HDF5 IO (large)")
+    result["HDF5 IO (large)"] = h5_IO(1 << 27)
+    progress.update(task1, advance=1, description="pybind11 primes")
+    result["pybind11 primes"] = prime_benchmark(300000, "pybind11")
+    progress.update(task1, advance=1, description="cython primes")
+    result["cython primes"] = prime_benchmark(300000, "cython")
+    progress.update(task1, advance=1, description="numba primes")
+    result["numba primes"] = prime_benchmark(300000, "numba")
 print(toml.dumps(result))
