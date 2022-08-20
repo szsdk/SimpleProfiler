@@ -13,9 +13,11 @@ import click
 
 import utils
 
-logging.basicConfig(
-    level="INFO", format= "%(message)s", datefmt="[%X]", handlers=[RichHandler()]
-)
+logging.basicConfig(level="INFO",
+                    format="%(message)s",
+                    datefmt="[%X]",
+                    handlers=[RichHandler()])
+
 
 def cpu_info():
     try:
@@ -67,8 +69,7 @@ def h5_IO(nbytes):
     with tempfile.NamedTemporaryFile(dir=Path(), suffix=".h5") as f:
         with h5py.File(f.name, "w") as fp:
             info = utils.timeit(
-                lambda: fp.create_dataset(utils.rand_str(), data=a), n=10
-            )
+                lambda: fp.create_dataset(utils.rand_str(), data=a), n=10)
         result["writing speed (GB/s)"] = nbytes * 1e-9 / info["mean(s)"]
         with h5py.File(f.name, "r") as fp:
             keys = iter(fp.keys())
@@ -94,6 +95,28 @@ def prime_benchmark(nb_primes, method: str):
     info = utils.timeit(lambda: primes(nb_primes))
     info["number of primes"] = nb_primes
     info["method"] = method
+    return info
+
+
+def cuda_benchmark():
+    try:
+        import cupy as cp
+        import sp_cuda as scu
+    except ImportError:
+        return {}
+
+    info = dict()
+    logging.info("cuda runtime")
+    info["cuda runtime"] = scu.get_cuda_runtime()
+    logging.info("copy to a GPU device (cupy)")
+    info["cupy copy to a device"] = scu.cp_copy_to_device(1 << 28)
+    logging.info("copy from a GPU device (cupy)")
+    info["cupy copy from a device"] = scu.cp_copy_from_device(1 << 28)
+    logging.info("copy in a GPU device (cupy)")
+    info["cupy copy in a device"] = scu.cp_copy_in_device(1 << 28)
+    if cp.cuda.runtime.getDeviceCount() >= 2:
+        logging.info("copy between devices (cupy)")
+        info["cupy copy between devices"] = scu.cp_copy_between_device(1 << 28)
     return info
 
 
@@ -126,9 +149,12 @@ def main(no_log):
     logging.info("primes (numba)")
     result["numba primes"] = prime_benchmark(300000, "numba")
 
+    result.update(cuda_benchmark())
+
     console = Console()
     syntax = Syntax(toml.dumps(result), "toml", background_color="default")
     console.print(syntax)
+
 
 if __name__ == "__main__":
     main()

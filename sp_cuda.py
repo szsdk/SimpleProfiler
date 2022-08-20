@@ -1,6 +1,5 @@
 import cupy as cp
 import cupyx
-import toml
 from utils import timeit, rand_array
 
 
@@ -20,7 +19,6 @@ def cp_copy_to_device(nbytes):
     info = timeit(lambda: cp.array(a), n=7)
     info["memory size"] = f"{a.nbytes / (1 << 20)} MB"
     info["copy speed (GB/s)"] = a.nbytes / (1 << 30) / info["mean(s)"]
-    info.pop("time points(s)")
     return info
 
 
@@ -30,7 +28,6 @@ def cp_copy_from_device(nbytes):
     info = timeit(lambda: cp.asnumpy(a), n=7)
     info["memory size"] = f"{a.nbytes / (1 << 20)} MB"
     info["copy speed (GB/s)"] = a.nbytes / (1 << 30) / info["mean(s)"]
-    info.pop("time points(s)")
     return info
 
 
@@ -47,7 +44,6 @@ def cp_copy_in_device(nbytes):
     info = timeit(lambda: gpu_copy(b, a), n=7)
     info["memory size"] = f"{a.nbytes / (1 << 20)} MB"
     info["copy speed (GB/s)"] = a.nbytes / (1 << 30) / info["mean(s)"]
-    info.pop("time points(s)")
     return info
 
 
@@ -59,15 +55,4 @@ def cp_copy_between_device(nbytes):
     info = timeit(lambda: gpu_copy(b, a), n=7)
     info["memory size"] = f"{a.nbytes / (1 << 20)} MB"
     info["copy speed (GB/s)"] = a.nbytes / (1 << 30) / info["mean(s)"]
-    info.pop("time points(s)")
     return info
-
-
-info = dict()
-info["cuda runtime"] = get_cuda_runtime()
-info["cupy copy to devices"] = cp_copy_to_device(1 << 28)
-info["cupy copy from devices"] = cp_copy_from_device(1 << 28)
-info["cupy copy in devices"] = cp_copy_in_device(1 << 28)
-if cp.cuda.runtime.getDeviceCount() >= 2:
-    info["cupy copy between devices"] = cp_copy_between_device(1 << 28)
-print(toml.dumps(info))
