@@ -1,7 +1,7 @@
 [system]
-time = 2022-08-20T10:44:27.407730
+time = 2022-08-20T18:30:47.380153
 system = "Linux"
-"node Name" = "adag025"
+"node Name" = "adag026"
 release = "5.3.18-150300.59.68-default"
 version = "#1 SMP Wed May 4 11:29:09 UTC 2022 (ea30951)"
 machine = "x86_64"
@@ -18,9 +18,9 @@ arch_string_raw = "x86_64"
 vendor_id_raw = "GenuineIntel"
 brand_raw = "Intel(R) Xeon(R) Platinum 8360Y CPU @ 2.40GHz"
 hz_advertised_friendly = "2.4000 GHz"
-hz_actual_friendly = "864.1670 MHz"
+hz_actual_friendly = "800.0780 MHz"
 hz_advertised = [ 2400000000, 0,]
-hz_actual = [ 864167000, 0,]
+hz_actual = [ 800078000, 0,]
 stepping = 6
 model = 106
 family = 6
@@ -33,54 +33,54 @@ l2_cache_line_size = 256
 l2_cache_associativity = 6
 
 ["numpy copy (small)"]
-"mean(s)" = 1.1135291840348924e-5
-"std(s)" = 5.350630801778785e-6
+"mean (s)" = 3.365693347794669e-5
+"std (s)" = 1.2593736742373183e-5
 "memory size (MB)" = 0.25
-"copy speed (GB/s)" = 21.92494175279288
+"copy speed (GB/s)" = 7.253798839397245
 
 ["numpy copy (large)"]
-"mean(s)" = 0.015106857887336187
-"std(s)" = 0.001780135308668822
+"mean (s)" = 0.015108333634478706
+"std (s)" = 0.0017408727698359858
 "memory size (MB)" = 128.0
-"copy speed (GB/s)" = 8.274387760328725
+"copy speed (GB/s)" = 8.273579537238819
 
 ["numpy float sum (small)"]
-"mean(s)" = 2.381365214075361e-5
-"std(s)" = 1.6557350856783555e-5
+"mean (s)" = 2.414334033216749e-5
+"std (s)" = 1.7178175543208903e-5
 "array size" = 32768
-"sum speed (G element/s)" = 1.376017412462422
+"sum speed (G element/s)" = 1.3572272746510312
 
 ["numpy float sum (large)"]
-"mean(s)" = 0.011513587087392807
-"std(s)" = 1.4702674166318319e-5
+"mean (s)" = 0.01173922126846654
+"std (s)" = 4.005408279170706e-5
 "array size" = 16777216
-"sum speed (G element/s)" = 1.4571667259433667
+"sum speed (G element/s)" = 1.4291591934693604
 
 ["HDF5 IO (small)"]
 "array size (MB)" = 0.262144
-"writing speed (GB/s)" = 0.18860281848628463
-"reading speed (GB/s)" = 0.52966196980763
+"writing speed (GB/s)" = 0.23681954850411896
+"reading speed (GB/s)" = 0.3778239335768839
 
 ["HDF5 IO (large)"]
 "array size (MB)" = 134.217728
-"writing speed (GB/s)" = 2.8135895570752982
-"reading speed (GB/s)" = 3.176882000293413
+"writing speed (GB/s)" = 2.6945413766496458
+"reading speed (GB/s)" = 2.6993691854294584
 
 ["pybind11 primes"]
-"mean(s)" = 0.1940176634117961
-"std(s)" = 0.027331638306475114
+"mean (s)" = 0.2539047015830874
+"std (s)" = 0.026897983065097504
 "number of primes" = 300000
 method = "pybind11"
 
 ["cython primes"]
-"mean(s)" = 0.18017567303031684
-"std(s)" = 0.0004896717900626673
+"mean (s)" = 0.17936883559450506
+"std (s)" = 0.0005556854775724012
 "number of primes" = 300000
 method = "cython"
 
 ["numba primes"]
-"mean(s)" = 0.20821409225463866
-"std(s)" = 0.00016793267091319222
+"mean (s)" = 0.20822783848270773
+"std (s)" = 0.00022027229024676814
 "number of primes" = 300000
 method = "numba"
 
@@ -127,26 +127,47 @@ OS = "Linux-5.3.18-150300.59.68-default-x86_64-with-glibc2.31"
 "Device 3 PCI Bus ID" = "0000:E3:00.0"
 
 ["cupy copy to a device"]
-"mean(s)" = 0.047124617733061314
-"std(s)" = 0.030159180964910704
+"mean (s)" = 0.047938760103923936
+"std (s)" = 0.030816626561830464
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 5.305082821385032
+"copy speed (GB/s)" = 5.214986776004178
 
 ["cupy copy from a device"]
-"mean(s)" = 0.06064235685127122
-"std(s)" = 0.00019399159244445948
+"mean (s)" = 0.06101561377623251
+"std (s)" = 0.00022379575213151172
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 4.122531065425755
+"copy speed (GB/s)" = 4.097311893261374
 
 ["cupy copy in a device"]
-"mean(s)" = 0.00036445180220263343
-"std(s)" = 2.372561881395333e-5
+"mean (s)" = 0.0003694361075758934
+"std (s)" = 3.660533474754081e-5
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 685.9617608942464
+"copy speed (GB/s)" = 676.7069998663907
 
 ["cupy copy between devices"]
-"mean(s)" = 0.0030185642785259654
-"std(s)" = 0.0003293751295525362
+"mean (s)" = 0.003018220088311604
+"std (s)" = 0.00033002272998510217
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 82.82083034590231
+"copy speed (GB/s)" = 82.83027502472503
 
+["cupy sum (small)"]
+"array size (GB)" = 6.103515625e-5
+"mean (s)" = 3.971225981201444e-5
+"std (s)" = 1.4483137292236385e-5
+"speed (GB/s)" = 1.5369348543477899
+
+["cupy sum (large)"]
+"array size (GB)" = 0.25
+"mean (s)" = 0.034155042708984444
+"std (s)" = 0.004233885755078672
+"speed (GB/s)" = 7.3195633842448045
+
+["cupy svd (small)"]
+"array size" = 16
+"mean (s)" = 0.0009346493918980871
+"std (s)" = 3.0085276904386696e-5
+
+["cupy svd (large)"]
+"array size" = 512
+"mean (s)" = 0.10303774981626443
+"std (s)" = 1.69876107475475e-5

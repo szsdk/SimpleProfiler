@@ -69,7 +69,7 @@ def cp_timeit(f, n=10, time_points=False):
         event.record()
         event.synchronize()
 
-    return timeit(_f, n ,time_points=time_points)
+    return timeit(_f, n, time_points=time_points)
 
 
 def cp_svd(n, n_times=7):
@@ -84,7 +84,7 @@ def cp_svd(n, n_times=7):
 def cp_sum(nbytes, n_times=7):
     cp.sum(cp.empty(2))
     a = cp.array(rand_array(nbytes))
-    size_GB = a.nbytes / (1<<30)
+    size_GB = a.nbytes / (1 << 30)
     info = {"array size (GB)": size_GB}
     info.update(cp_timeit(lambda: cp.sum(a), n_times))
     info["speed (GB/s)"] = size_GB / info["mean (s)"]

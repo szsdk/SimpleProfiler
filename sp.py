@@ -171,7 +171,7 @@ def main(no_log, output):
 
     if output != "":
         with open(output, "w") as fp:
-            print(output_str, file=fp)
+            print(output_str, file=fp, end="")
 
 
 if __name__ == "__main__":
