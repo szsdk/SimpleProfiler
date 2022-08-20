@@ -1,5 +1,5 @@
 [system]
-time = 2022-08-20T10:34:05.399650
+time = 2022-08-20T18:24:33.038824
 system = "Linux"
 "node Name" = "mpsd-hpc-gpu-004"
 release = "4.9.0-16-amd64"
@@ -24,7 +24,7 @@ hz_actual = [ 2100000000, 0,]
 stepping = 7
 model = 85
 family = 6
-flags = [ "3dnowprefetch", "abm", "acpi", "adx", "aes", "aperfmperf", "apic", "arat", "arch_capabilities", "arch_perfmon", "art", "avx", "avx2", "avx512bw", "avx512cd", "avx512dq", "avx512f", "avx512vl", "avx512vnni", "bmi1", "bmi2", "bts"
+flags = [ "3dnowprefetch", "abm", "acpi", "adx", "aes", "aperfmperf", "apic", "arat", "arch_capabilities", "arch_perfmon", "art", "avx", "avx2", "avx512bw", "avx512cd", "avx512dq", "avx512f", "avx512vl", "avx512vnni", "bmi1", "bmi2", "bts", "clflush", "clflushopt", "clwb", "cmov", "constant_tsc", "cqm", "cqm_llc", "cqm_mbm_local", "cqm_mbm_total", "cqm_occup_llc", "cx16", "cx8", "dca", "de", "ds_cpl", "dtes64", "dtherm", "dts", "epb", "ept", "erms", "est", "f16c", "flexpriority", "flush_l1d", "fma", "fpu", "fsgsbase", "fxsr", "ht", "ibpb", "ibrs", "ibrs_enhanced", "ida", "intel_pt", "invpcid", "invpcid_single", "kaiser", "lahf_lm", "lm", "mca", "mce", "md_clear", "mmx", "monitor", "movbe", "mpx", "msr", "mtrr", "nonstop_tsc", "nopl", "nx", "ospke", "osxsave", "pae", "pat", "pbe", "pcid", "pclmulqdq", "pdcm", "pdpe1gb", "pebs", "pge", "pku", "pln", "pni", "popcnt", "pqe", "pqm", "pse", "pse36", "pts", "rdrand", "rdrnd", "rdseed", "rdtscp", "rep_good", "sdbg", "sep", "smap", "smep", "smx", "ss", "ssbd", "sse", "sse2", "sse4_1", "sse4_2", "ssse3", "stibp", "syscall", "tm", "tm2", "tpr_shadow", "tsc", "tsc_adjust", "tsc_deadline_timer", "tscdeadline", "vme", "vmx", "vnmi", "vpid", "x2apic", "xgetbv1", "xsave", "xsavec", "xsaveopt", "xsaves", "xtopology", "xtpr",]
 l3_cache_size = 28835840
 l2_cache_size = 1048576
 l1_data_cache_size = 32768
@@ -33,54 +33,54 @@ l2_cache_line_size = 256
 l2_cache_associativity = 6
 
 ["numpy copy (small)"]
-"mean(s)" = 1.2887907879693167e-5
-"std(s)" = 5.71531890989283e-6
+"mean (s)" = 1.423593078340803e-5
+"std (s)" = 4.278700705641983e-6
 "memory size (MB)" = 0.25
-"copy speed (GB/s)" = 18.94338687698724
+"copy speed (GB/s)" = 17.149607476635513
 
 ["numpy copy (large)"]
-"mean(s)" = 0.024940906890801022
-"std(s)" = 9.587704018476006e-5
+"mean (s)" = 0.02518156117626599
+"std (s)" = 5.1448911143848466e-5
 "memory size (MB)" = 128.0
-"copy speed (GB/s)" = 5.011846623993607
+"copy speed (GB/s)" = 4.96394957902032
 
 ["numpy float sum (small)"]
-"mean(s)" = 2.1291630608694894e-5
-"std(s)" = 2.578955386811159e-5
+"mean (s)" = 2.302229404449463e-5
+"std (s)" = 2.7425565346288954e-5
 "array size" = 32768
-"sum speed (G element/s)" = 1.5390084771909618
+"sum speed (G element/s)" = 1.4233160230110034
 
 ["numpy float sum (large)"]
-"mean(s)" = 0.012083583112273897
-"std(s)" = 5.336536173377414e-5
+"mean (s)" = 0.012647845383201326
+"std (s)" = 0.0001707464845372902
 "array size" = 16777216
-"sum speed (G element/s)" = 1.3884305544237576
+"sum speed (G element/s)" = 1.3264880690495506
 
 ["HDF5 IO (small)"]
 "array size (MB)" = 0.262144
-"writing speed (GB/s)" = 0.8419348236974006
-"reading speed (GB/s)" = 0.4181330751581263
+"writing speed (GB/s)" = 0.788162722359087
+"reading speed (GB/s)" = 0.4226279929086118
 
 ["HDF5 IO (large)"]
 "array size (MB)" = 134.217728
-"writing speed (GB/s)" = 2.5697917194483444
-"reading speed (GB/s)" = 0.9433658518873221
+"writing speed (GB/s)" = 2.5501291056734092
+"reading speed (GB/s)" = 0.9715262472366825
 
 ["pybind11 primes"]
-"mean(s)" = 0.24333530254662036
-"std(s)" = 0.0009781882481899296
+"mean (s)" = 0.2630461171269417
+"std (s)" = 0.006609186591093174
 "number of primes" = 300000
 method = "pybind11"
 
 ["cython primes"]
-"mean(s)" = 0.2232389844954014
-"std(s)" = 0.002307811474975585
+"mean (s)" = 0.22490422166883944
+"std (s)" = 0.004139450626293134
 "number of primes" = 300000
 method = "cython"
 
 ["numba primes"]
-"mean(s)" = 0.36652139835059644
-"std(s)" = 0.0005494902587579826
+"mean (s)" = 0.38499486856162546
+"std (s)" = 0.009025094944829793
 "number of primes" = 300000
 method = "numba"
 
@@ -127,26 +127,48 @@ OS = "Linux-4.9.0-16-amd64-x86_64-with-glibc2.24"
 "Device 3 PCI Bus ID" = "0000:AF:00.0"
 
 ["cupy copy to a device"]
-"mean(s)" = 0.07902614027261734
-"std(s)" = 0.04341657747877548
+"mean (s)" = 0.0784352852829865
+"std (s)" = 0.04297009177141564
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 3.1635101896356352
+"copy speed (GB/s)" = 3.187340991978617
 
 ["cupy copy from a device"]
-"mean(s)" = 0.09933080470987729
-"std(s)" = 0.0002988708163713125
+"mean (s)" = 0.09906438844544548
+"std (s)" = 0.000501474410779009
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 2.516842592086042
+"copy speed (GB/s)" = 2.523611197960147
 
 ["cupy copy in a device"]
-"mean(s)" = 0.0036633796989917755
-"std(s)" = 0.007240189959742682
+"mean (s)" = 0.0036592563348157065
+"std (s)" = 0.0072281764139976775
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 68.24299432264809
+"copy speed (GB/s)" = 68.3198926572579
 
 ["cupy copy between devices"]
-"mean(s)" = 0.008599894919565745
-"std(s)" = 0.007454252654480595
+"mean (s)" = 0.008588239550590515
+"std (s)" = 0.007425939882598291
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 29.07012263966405
+"copy speed (GB/s)" = 29.10957461390447
+
+["cupy sum (small)"]
+"array size (GB)" = 6.103515625e-5
+"mean (s)" = 4.313034670693534e-5
+"std (s)" = 2.4083246519891428e-5
+"speed (GB/s)" = 1.4151325206060905
+
+["cupy sum (large)"]
+"array size (GB)" = 0.25
+"mean (s)" = 0.028664473444223404
+"std (s)" = 0.007695693873850031
+"speed (GB/s)" = 8.72159750244361
+
+["cupy svd (small)"]
+"array size" = 16
+"mean (s)" = 0.0016152938561780112
+"std (s)" = 4.076657216656908e-5
+
+["cupy svd (large)"]
+"array size" = 512
+"mean (s)" = 0.7917469021465097
+"std (s)" = 0.02357126730436047
 

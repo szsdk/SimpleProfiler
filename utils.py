@@ -17,9 +17,9 @@ def rand_array(nbytes):
 def stat_ts(ts):
     t = np.array(ts)
     return {
-        "mean(s)": float(t.mean()),
-        "std(s)": float(t.std()),
-        "time points(s)": ts
+        "mean (s)": float(t.mean()),
+        "std (s)": float(t.std()),
+        "time points (s)": ts
     }
 
 
@@ -31,5 +31,5 @@ def timeit(f, n=10, time_points=False):
         ts.append(time.perf_counter() - t0)
     ans = stat_ts(ts)
     if not time_points:
-        ans.pop("time points(s)")
+        ans.pop("time points (s)")
     return ans
