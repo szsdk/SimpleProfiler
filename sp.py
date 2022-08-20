@@ -101,10 +101,16 @@ def prime_benchmark(nb_primes, method: str):
 def cuda_benchmark():
     try:
         import cupy as cp
-        import sp_cuda as scu
     except ImportError:
+        logging.warning("Cupy is not installed")
+        return {}
+    try:
+        cp.cuda.runtime.getDeviceCount()
+    except cp.cuda.runtime.CUDARuntimeError:
+        logging.warning("No CUDA-capable device detected")
         return {}
 
+    import sp_cuda as scu
     info = dict()
     logging.info("cuda runtime")
     info["cuda runtime"] = scu.get_cuda_runtime()
