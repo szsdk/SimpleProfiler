@@ -1,0 +1,83 @@
+[system]
+time = 2022-08-20T08:37:20.319765
+system = "Darwin"
+"node Name" = "SZMacAir"
+release = "21.6.0"
+version = "Darwin Kernel Version 21.6.0: Wed Aug 10 14:25:27 PDT 2022; root:xnu-8020.141.5~2/RELEASE_X86_64"
+machine = "x86_64"
+processor = "i386"
+
+[cpu]
+python_version = "3.9.13.final.0 (64 bit)"
+cpuinfo_version = [ 8, 0, 0,]
+cpuinfo_version_string = "8.0.0"
+arch = "X86_64"
+bits = 64
+count = 8
+arch_string_raw = "x86_64"
+vendor_id_raw = "GenuineIntel"
+brand_raw = "Intel(R) Core(TM) i7-1060NG7 CPU @ 1.20GHz"
+hz_advertised_friendly = "1.2000 GHz"
+hz_actual_friendly = "1.2000 GHz"
+hz_advertised = [ 1200000000, 0,]
+hz_actual = [ 1200000000, 0,]
+l2_cache_size = 262144
+stepping = 5
+model = 126
+family = 6
+flags = [ "1gbpage", "3dnowprefetch", "abm", "acapmsr", "acpi", "adx", "aes", "apic", "avx", "avx1.0", "avx2", "avx512bitalg", "avx512bw", "avx512cd", "avx512dq", "avx512f", "avx512ifma", "avx512vbmi", "avx512vbmi2", "a
+l2_cache_line_size = 256
+l2_cache_associativity = 6
+
+["numpy copy (small)"]
+"mean(s)" = 1.2805428571389349e-5
+"std(s)" = 1.076664513152746e-5
+"memory size (MB)" = 0.25
+"copy speed (GB/s)" = 19.065400555626347
+
+["numpy copy (large)"]
+"mean(s)" = 0.012708563000000086
+"std(s)" = 0.0005639674146648133
+"memory size (MB)" = 128.0
+"copy speed (GB/s)" = 9.83588781831582
+
+["numpy float sum (small)"]
+"mean(s)" = 2.0266000000125827e-5
+"std(s)" = 2.1054371585542255e-5
+"array size" = 32768
+"sum speed (G element/s)" = 1.6168952925982707
+
+["numpy float sum (large)"]
+"mean(s)" = 0.007149026714285649
+"std(s)" = 0.00031614471375749926
+"array size" = 16777216
+"sum speed (G element/s)" = 2.3467832294534134
+
+["HDF5 IO (small)"]
+"array size (MB)" = 0.262144
+"writing speed (GB/s)" = 0.9624936480943906
+"reading speed (GB/s)" = 0.9072858294383839
+
+["HDF5 IO (large)"]
+"array size (MB)" = 134.217728
+"writing speed (GB/s)" = 1.5775717396701674
+"reading speed (GB/s)" = 2.9671643266742955
+
+["pybind11 primes"]
+"mean(s)" = 0.18204172670000002
+"std(s)" = 0.011701380247190224
+"number of primes" = 300000
+method = "pybind11"
+
+["cython primes"]
+"mean(s)" = 0.18122791219999987
+"std(s)" = 0.009061699456190968
+"number of primes" = 300000
+method = "cython"
+
+["numba primes"]
+"mean(s)" = 0.20291720049999978
+"std(s)" = 0.004485829891853848
+"number of primes" = 300000
+method = "numba"
+

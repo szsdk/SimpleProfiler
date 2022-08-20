@@ -1,6 +1,7 @@
 from pathlib import Path
 import tempfile
 import logging
+from datetime import datetime
 
 from rich.logging import RichHandler
 from rich.console import Console
@@ -8,15 +9,13 @@ from rich.syntax import Syntax
 import platform
 import numpy as np
 import toml
+import click
 
 import utils
 
-
-FORMAT = "%(message)s"
 logging.basicConfig(
-    level="INFO", format=FORMAT, datefmt="[%X]", handlers=[RichHandler()]
+    level="INFO", format= "%(message)s", datefmt="[%X]", handlers=[RichHandler()]
 )
-
 
 def cpu_info():
     try:
@@ -30,12 +29,13 @@ def cpu_info():
 def system_info():
     uname = platform.uname()
     return {
-        "System": uname.system,
-        "Node Name": uname.node,
-        "Release": uname.release,
-        "Version": uname.version,
-        "Machine": uname.machine,
-        "Processor": uname.processor,
+        "time": datetime.now(),
+        "system": uname.system,
+        "node Name": uname.node,
+        "release": uname.release,
+        "version": uname.version,
+        "machine": uname.machine,
+        "processor": uname.processor,
     }
 
 
@@ -97,30 +97,38 @@ def prime_benchmark(nb_primes, method: str):
     return info
 
 
-result = dict()
-result["system"] = system_info()
-logging.info("system information")
-result["cpu"] = cpu_info()
-logging.info("cpu information")
-logging.info("numpy array (small) in memory copy")
-result["numpy copy (small)"] = np_copy(1 << 18)
-logging.info("numpy array (large) in memory copy")
-result["numpy copy (large)"] = np_copy(1 << 27)
-logging.info("sum of a samll numpy float array")
-result["numpy float sum (small)"] = np_float_sum(1 << 18)
-logging.info("sum of a large numpy float array")
-result["numpy float sum (large)"] = np_float_sum(1 << 27)
-logging.info("HDF5 IO (small)")
-result["HDF5 IO (small)"] = h5_IO(1 << 18)
-logging.info("HDF5 IO (large)")
-result["HDF5 IO (large)"] = h5_IO(1 << 27)
-logging.info("primes (pybind11)")
-result["pybind11 primes"] = prime_benchmark(300000, "pybind11")
-logging.info("primes (cython)")
-result["cython primes"] = prime_benchmark(300000, "cython")
-logging.info("primes (numba)")
-result["numba primes"] = prime_benchmark(300000, "numba")
+@click.command()
+@click.option("--no-log", is_flag=True, default=True)
+def main(no_log):
+    if not no_log:
+        logging.disable()
+    result = dict()
+    result["system"] = system_info()
+    logging.info("system information")
+    result["cpu"] = cpu_info()
+    logging.info("cpu information")
+    logging.info("numpy array (small) in memory copy")
+    result["numpy copy (small)"] = np_copy(1 << 18)
+    logging.info("numpy array (large) in memory copy")
+    result["numpy copy (large)"] = np_copy(1 << 27)
+    logging.info("sum of a samll numpy float array")
+    result["numpy float sum (small)"] = np_float_sum(1 << 18)
+    logging.info("sum of a large numpy float array")
+    result["numpy float sum (large)"] = np_float_sum(1 << 27)
+    logging.info("HDF5 IO (small)")
+    result["HDF5 IO (small)"] = h5_IO(1 << 18)
+    logging.info("HDF5 IO (large)")
+    result["HDF5 IO (large)"] = h5_IO(1 << 27)
+    logging.info("primes (pybind11)")
+    result["pybind11 primes"] = prime_benchmark(300000, "pybind11")
+    logging.info("primes (cython)")
+    result["cython primes"] = prime_benchmark(300000, "cython")
+    logging.info("primes (numba)")
+    result["numba primes"] = prime_benchmark(300000, "numba")
 
-console = Console()
-syntax = Syntax(toml.dumps(result), "toml", background_color="default")
-console.print(syntax)
+    console = Console()
+    syntax = Syntax(toml.dumps(result), "toml", background_color="default")
+    console.print(syntax)
+
+if __name__ == "__main__":
+    main()
