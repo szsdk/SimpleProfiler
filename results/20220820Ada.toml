@@ -1,5 +1,5 @@
 [system]
-time = 2022-08-20T10:30:31.589693
+time = 2022-08-20T10:44:27.407730
 system = "Linux"
 "node Name" = "adag025"
 release = "5.3.18-150300.59.68-default"
@@ -18,13 +18,13 @@ arch_string_raw = "x86_64"
 vendor_id_raw = "GenuineIntel"
 brand_raw = "Intel(R) Xeon(R) Platinum 8360Y CPU @ 2.40GHz"
 hz_advertised_friendly = "2.4000 GHz"
-hz_actual_friendly = "800.0000 MHz"
+hz_actual_friendly = "864.1670 MHz"
 hz_advertised = [ 2400000000, 0,]
-hz_actual = [ 800000000, 0,]
+hz_actual = [ 864167000, 0,]
 stepping = 6
 model = 106
 family = 6
-flags = [ "3dnowprefetch", "abm", "acpi", "adx", "aes", "aperfmperf", "apic", "a
+flags = [ "3dnowprefetch", "abm", "acpi", "adx", "aes", "aperfmperf", "apic", "arat", "arch_capabilities", "arch_perfmon", "art", "avx", "avx2", "avx512_bitalg", "avx512_vbmi2", "avx512_vnni", "avx512_vpopcntdq", "avx512bitalg", "avx512bw", "avx512cd", "avx512dq", "avx512f", "avx512ifma", "avx512vbmi", "avx512vbmi2", "avx512vl", "avx512vnni", "avx512vpopcntdq", "bmi1", "bmi2", "bts", "cat_l3", "clflush", "clflushopt", "clwb", "cmov", "constant_tsc", "cpuid", "cpuid_fault", "cqm", "cqm_llc", "cqm_mbm_local", "cqm_mbm_total", "cqm_occup_llc", "cx16", "cx8", "dca", "de", "ds_cpl", "dtes64", "dtherm", "dts", "epb", "ept", "ept_ad", "erms", "est", "f16c", "flexpriority", "flush_l1d", "fma", "fpu", "fsgsbase", "fsrm", "fxsr", "gfni", "hle", "ht", "ibpb", "ibrs", "ibrs_enhanced", "ida", "intel_pt", "invpcid", "invpcid_single", "la57", "lahf_lm", "lm", "mba", "mca", "mce", "md_clear", "mmx", "monitor", "movbe", "msr", "mtrr", "nonstop_tsc", "nopl", "nx", "ospke", "osxsave", "pae", "pat", "pbe", "pcid", "pclmulqdq", "pconfig", "pdcm", "pdpe1gb", "pebs", "pge", "pku", "pln", "pni", "popcnt", "pqe", "pqm", "pse", "pse36", "pts", "rdpid", "rdrand", "rdrnd", "rdseed", "rdt_a", "rdtscp", "rep_good", "rtm", "sdbg", "sep", "sgx", "sgx_lc", "sha", "sha_ni", "smap", "smep", "smx", "split_lock_detect", "ss", "ssbd", "sse", "sse2", "sse4_1", "sse4_2", "ssse3", "stibp", "syscall", "tm", "tm2", "tme", "tpr_shadow", "tsc", "tsc_adjust", "tsc_deadline_timer", "tscdeadline", "umip", "vaes", "vme", "vmx", "vnmi", "vpclmulqdq", "vpid", "wbnoinvd", "x2apic", "xgetbv1", "xsave", "xsavec", "xsaveopt", "xsaves", "xtopology", "xtpr",]
 l3_cache_size = 56623104
 l2_cache_size = "90 MiB"
 l1_data_cache_size = "3.4 MiB"
@@ -33,54 +33,54 @@ l2_cache_line_size = 256
 l2_cache_associativity = 6
 
 ["numpy copy (small)"]
-"mean(s)" = 3.3465613211904254e-5
-"std(s)" = 1.2175613154033934e-5
+"mean(s)" = 1.1135291840348924e-5
+"std(s)" = 5.350630801778785e-6
 "memory size (MB)" = 0.25
-"copy speed (GB/s)" = 7.2952682341154675
+"copy speed (GB/s)" = 21.92494175279288
 
 ["numpy copy (large)"]
-"mean(s)" = 0.017082935199141502
-"std(s)" = 0.003153397622869952
+"mean(s)" = 0.015106857887336187
+"std(s)" = 0.001780135308668822
 "memory size (MB)" = 128.0
-"copy speed (GB/s)" = 7.317243702140943
+"copy speed (GB/s)" = 8.274387760328725
 
 ["numpy float sum (small)"]
-"mean(s)" = 2.4403445422649384e-5
-"std(s)" = 1.8892263967190033e-5
+"mean(s)" = 2.381365214075361e-5
+"std(s)" = 1.6557350856783555e-5
 "array size" = 32768
-"sum speed (G element/s)" = 1.3427612139385567
+"sum speed (G element/s)" = 1.376017412462422
 
 ["numpy float sum (large)"]
-"mean(s)" = 0.011984390871865409
-"std(s)" = 6.360268239063528e-5
+"mean(s)" = 0.011513587087392807
+"std(s)" = 1.4702674166318319e-5
 "array size" = 16777216
-"sum speed (G element/s)" = 1.3999222972096348
+"sum speed (G element/s)" = 1.4571667259433667
 
 ["HDF5 IO (small)"]
 "array size (MB)" = 0.262144
-"writing speed (GB/s)" = 0.24854094090217876
-"reading speed (GB/s)" = 0.6202796745052659
+"writing speed (GB/s)" = 0.18860281848628463
+"reading speed (GB/s)" = 0.52966196980763
 
 ["HDF5 IO (large)"]
 "array size (MB)" = 134.217728
-"writing speed (GB/s)" = 2.7688648366576185
-"reading speed (GB/s)" = 2.1838646006965647
+"writing speed (GB/s)" = 2.8135895570752982
+"reading speed (GB/s)" = 3.176882000293413
 
 ["pybind11 primes"]
-"mean(s)" = 0.265855045709759
-"std(s)" = 0.0013395110610255766
+"mean(s)" = 0.1940176634117961
+"std(s)" = 0.027331638306475114
 "number of primes" = 300000
 method = "pybind11"
 
 ["cython primes"]
-"mean(s)" = 0.17963079288601874
-"std(s)" = 0.000539511846030579
+"mean(s)" = 0.18017567303031684
+"std(s)" = 0.0004896717900626673
 "number of primes" = 300000
 method = "cython"
 
 ["numba primes"]
-"mean(s)" = 0.22249920070171356
-"std(s)" = 0.030694806034923795
+"mean(s)" = 0.20821409225463866
+"std(s)" = 0.00016793267091319222
 "number of primes" = 300000
 method = "numba"
 
@@ -119,28 +119,34 @@ OS = "Linux-5.3.18-150300.59.68-default-x86_64-with-glibc2.31"
 "Device 1 Name" = "NVIDIA A100-SXM4-80GB"
 "Device 1 Compute Capability" = "80"
 "Device 1 PCI Bus ID" = "0000:4B:00.0"
+"Device 2 Name" = "NVIDIA A100-SXM4-80GB"
+"Device 2 Compute Capability" = "80"
+"Device 2 PCI Bus ID" = "0000:CA:00.0"
+"Device 3 Name" = "NVIDIA A100-SXM4-80GB"
+"Device 3 Compute Capability" = "80"
+"Device 3 PCI Bus ID" = "0000:E3:00.0"
 
 ["cupy copy to a device"]
-"mean(s)" = 0.048349092049258094
-"std(s)" = 0.03037801195712927
+"mean(s)" = 0.047124617733061314
+"std(s)" = 0.030159180964910704
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 5.170727916571831
+"copy speed (GB/s)" = 5.305082821385032
 
 ["cupy copy from a device"]
-"mean(s)" = 0.06184795591980219
-"std(s)" = 0.0001617774084987415
+"mean(s)" = 0.06064235685127122
+"std(s)" = 0.00019399159244445948
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 4.042170776414555
+"copy speed (GB/s)" = 4.122531065425755
 
 ["cupy copy in a device"]
-"mean(s)" = 0.00036608374544552395
-"std(s)" = 2.631312151419209e-5
+"mean(s)" = 0.00036445180220263343
+"std(s)" = 2.372561881395333e-5
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 682.9038522203437
+"copy speed (GB/s)" = 685.9617608942464
 
 ["cupy copy between devices"]
-"mean(s)" = 0.003021610900759697
-"std(s)" = 0.00033465094709563963
+"mean(s)" = 0.0030185642785259654
+"std(s)" = 0.0003293751295525362
 "memory size" = "256.0 MB"
-"copy speed (GB/s)" = 82.73732396753822
+"copy speed (GB/s)" = 82.82083034590231
 

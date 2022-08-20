@@ -122,7 +122,8 @@ def cuda_benchmark():
 
 @click.command()
 @click.option("--no-log", is_flag=True, default=True)
-def main(no_log):
+@click.option("--output", "-O", type=str, default="")
+def main(no_log, output):
     if not no_log:
         logging.disable()
     result = dict()
@@ -151,9 +152,14 @@ def main(no_log):
 
     result.update(cuda_benchmark())
 
+    output_str = toml.dumps(result)
     console = Console()
-    syntax = Syntax(toml.dumps(result), "toml", background_color="default")
+    syntax = Syntax(output_str, "toml", background_color="default")
     console.print(syntax)
+
+    if output != "":
+        with open(output, "w") as fp:
+            print(output_str, file=fp)
 
 
 if __name__ == "__main__":
