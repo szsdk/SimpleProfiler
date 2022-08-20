@@ -1,5 +1,5 @@
 [system]
-time = 2022-08-20T08:39:59.714228
+time = 2022-08-20T10:34:05.399650
 system = "Linux"
 "node Name" = "mpsd-hpc-gpu-004"
 release = "4.9.0-16-amd64"
@@ -33,54 +33,120 @@ l2_cache_line_size = 256
 l2_cache_associativity = 6
 
 ["numpy copy (small)"]
-"mean(s)" = 1.4074678931917464e-5
-"std(s)" = 6.0610319187269635e-6
+"mean(s)" = 1.2887907879693167e-5
+"std(s)" = 5.71531890989283e-6
 "memory size (MB)" = 0.25
-"copy speed (GB/s)" = 17.346088403221536
+"copy speed (GB/s)" = 18.94338687698724
 
 ["numpy copy (large)"]
-"mean(s)" = 0.024935183248349597
-"std(s)" = 2.114064885310045e-5
+"mean(s)" = 0.024940906890801022
+"std(s)" = 9.587704018476006e-5
 "memory size (MB)" = 128.0
-"copy speed (GB/s)" = 5.0129970473857846
+"copy speed (GB/s)" = 5.011846623993607
 
 ["numpy float sum (small)"]
-"mean(s)" = 2.2599207503455026e-5
-"std(s)" = 2.9284381816383875e-5
+"mean(s)" = 2.1291630608694894e-5
+"std(s)" = 2.578955386811159e-5
 "array size" = 32768
-"sum speed (G element/s)" = 1.449962349121771
+"sum speed (G element/s)" = 1.5390084771909618
 
 ["numpy float sum (large)"]
-"mean(s)" = 0.012148370168038778
-"std(s)" = 2.0498071823652924e-5
+"mean(s)" = 0.012083583112273897
+"std(s)" = 5.336536173377414e-5
 "array size" = 16777216
-"sum speed (G element/s)" = 1.3810260774024883
+"sum speed (G element/s)" = 1.3884305544237576
 
 ["HDF5 IO (small)"]
 "array size (MB)" = 0.262144
-"writing speed (GB/s)" = 0.8917256241387858
-"reading speed (GB/s)" = 0.37349999775834436
+"writing speed (GB/s)" = 0.8419348236974006
+"reading speed (GB/s)" = 0.4181330751581263
 
 ["HDF5 IO (large)"]
 "array size (MB)" = 134.217728
-"writing speed (GB/s)" = 2.404383091741754
-"reading speed (GB/s)" = 0.7698445833589772
+"writing speed (GB/s)" = 2.5697917194483444
+"reading speed (GB/s)" = 0.9433658518873221
 
 ["pybind11 primes"]
-"mean(s)" = 0.2589848741889
-"std(s)" = 0.006177933746712911
+"mean(s)" = 0.24333530254662036
+"std(s)" = 0.0009781882481899296
 "number of primes" = 300000
 method = "pybind11"
 
 ["cython primes"]
-"mean(s)" = 0.2246729888021946
-"std(s)" = 0.002332869572754061
+"mean(s)" = 0.2232389844954014
+"std(s)" = 0.002307811474975585
 "number of primes" = 300000
 method = "cython"
 
 ["numba primes"]
-"mean(s)" = 0.3668655216693878
-"std(s)" = 0.0003949288448408901
+"mean(s)" = 0.36652139835059644
+"std(s)" = 0.0005494902587579826
 "number of primes" = 300000
 method = "numba"
+
+["cuda runtime"]
+OS = "Linux-4.9.0-16-amd64-x86_64-with-glibc2.24"
+"Python Version" = "3.9.13"
+"CuPy Version" = "9.6.0"
+"CuPy Platform" = "NVIDIA CUDA"
+"NumPy Version" = "1.22.4"
+"SciPy Version" = "1.9.0"
+"Cython Build Version" = "0.29.24"
+"Cython Runtime Version" = "0.29.32"
+"CUDA Root" = "/usr/local/cuda"
+"nvcc PATH" = "/usr/local/cuda/bin/nvcc"
+"CUDA Build Version" = "10000"
+"CUDA Driver Version" = "10010"
+"CUDA Runtime Version" = "10000"
+"cuBLAS Version" = "10000"
+"cuFFT Version" = "10000"
+"cuRAND Version" = "10000"
+"cuSOLVER Version" = "(10, 0, 0)"
+"cuSPARSE Version" = "10000"
+"NVRTC Version" = "(10, 0)"
+"Thrust Version" = "100903"
+"CUB Build Version" = "<unknown>"
+"Jitify Build Version" = "65946d2"
+"cuDNN Build Version" = "None"
+"cuDNN Version" = "None"
+"NCCL Build Version" = "None"
+"NCCL Runtime Version" = "None"
+"cuTENSOR Version" = "None"
+"cuSPARSELt Build Version" = "None"
+"Device 0 Name" = "Tesla V100-SXM2-32GB"
+"Device 0 Compute Capability" = "70"
+"Device 0 PCI Bus ID" = "0000:18:00.0"
+"Device 1 Name" = "Tesla V100-SXM2-32GB"
+"Device 1 Compute Capability" = "70"
+"Device 1 PCI Bus ID" = "0000:3B:00.0"
+"Device 2 Name" = "Tesla V100-SXM2-32GB"
+"Device 2 Compute Capability" = "70"
+"Device 2 PCI Bus ID" = "0000:86:00.0"
+"Device 3 Name" = "Tesla V100-SXM2-32GB"
+"Device 3 Compute Capability" = "70"
+"Device 3 PCI Bus ID" = "0000:AF:00.0"
+
+["cupy copy to a device"]
+"mean(s)" = 0.07902614027261734
+"std(s)" = 0.04341657747877548
+"memory size" = "256.0 MB"
+"copy speed (GB/s)" = 3.1635101896356352
+
+["cupy copy from a device"]
+"mean(s)" = 0.09933080470987729
+"std(s)" = 0.0002988708163713125
+"memory size" = "256.0 MB"
+"copy speed (GB/s)" = 2.516842592086042
+
+["cupy copy in a device"]
+"mean(s)" = 0.0036633796989917755
+"std(s)" = 0.007240189959742682
+"memory size" = "256.0 MB"
+"copy speed (GB/s)" = 68.24299432264809
+
+["cupy copy between devices"]
+"mean(s)" = 0.008599894919565745
+"std(s)" = 0.007454252654480595
+"memory size" = "256.0 MB"
+"copy speed (GB/s)" = 29.07012263966405
 
