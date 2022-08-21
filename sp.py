@@ -6,10 +6,9 @@ from rich.console import Console
 from rich.syntax import Syntax
 from rich.style import Style
 from rich.table import Table
-
-
 import toml
 import click
+from click_default_group import DefaultGroup
 
 
 
@@ -132,7 +131,12 @@ def sort_stat(nodes, stat, sort_by=None):
     return info, table
 
 
-@click.command()
+@click.group(cls=DefaultGroup, default="main", default_if_no_args=True)
+def cli():
+    pass
+
+
+@cli.command()
 @click.argument("results", nargs=-1)
 @click.option("--highlight", default="_NONE_")
 def stat(results, highlight):
@@ -148,9 +152,7 @@ def stat(results, highlight):
         stat = concat_dict([r[k] for r in rs if k in r])
 
         sort_by = "mean (s)" if "mean (s)" in stat else None
-        info, table = sort_stat(
-            nodes, stat, sort_by=sort_by
-        )
+        info, table = sort_stat(nodes, stat, sort_by=sort_by)
         console.print(
             Syntax(toml.dumps({k: info}), "toml", background_color="default"), end=""
         )
@@ -164,14 +166,18 @@ def stat(results, highlight):
             width = None
             tab.add_column(k, width=width)
         for l in zip(*list(table.values())):
-            if  highlight in l[-1]:
+            if highlight in l[-1]:
                 style = Style(color="rgb(240,0,0)")
             else:
                 style = Style.null()
-            tab.add_row(*[pretty_float(i) if isinstance(i, float) else str(i) for i in l], style=style)
+            tab.add_row(
+                *[pretty_float(i) if isinstance(i, float) else str(i) for i in l],
+                style=style,
+            )
         console.print(tab)
 
-@click.command()
+
+@cli.command()
 @click.option("--no-log", is_flag=True, default=True)
 @click.option("--output", "-O", type=str, default="")
 def main(no_log, output):
@@ -193,5 +199,4 @@ def main(no_log, output):
 
 
 if __name__ == "__main__":
-    stat()
-    # main()
+    cli()
