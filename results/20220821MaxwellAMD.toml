@@ -1,0 +1,82 @@
+[system]
+time = 2022-08-21T11:59:54.378299
+system = "Linux"
+"node Name" = "max-exfl344.desy.de"
+release = "3.10.0-1160.71.1.el7.x86_64"
+version = "#1 SMP Tue Jun 28 15:37:28 UTC 2022"
+machine = "x86_64"
+processor = "x86_64"
+
+[cpu]
+python_version = "3.8.13.final.0 (64 bit)"
+cpuinfo_version = [ 8, 0, 0,]
+cpuinfo_version_string = "8.0.0"
+arch = "X86_64"
+bits = 64
+count = 128
+arch_string_raw = "x86_64"
+vendor_id_raw = "AuthenticAMD"
+brand_raw = "AMD EPYC 7542 32-Core Processor"
+hz_advertised_friendly = "2.8943 GHz"
+hz_actual_friendly = "2.8943 GHz"
+hz_advertised = [ 2894280000, 0,]
+hz_actual = [ 2894280000, 0,]
+model = 49
+family = 23
+flags = [ "3dnowprefetch", "abm", "adx", "aes", "aperfmperf", "apic", "arat", "art", "avic", "avx", "avx2", "bmi1", "bmi2", "bpext", "cat_l3", "cdp_l3", "clflush", "clflushopt", "clwb", "clzero", "cmov", "cmp_legacy", "constant_tsc", "cpb", "cqm", "cqm_llc", "cqm_mbm_local", "cqm_mbm_total", "cqm_occup_llc", "cr8_legacy", "cx16", "cx8", "de", "decodeassists", "eagerfpu", "extapic", "extd_apicid", "f16c", "flushbyasid", "fma", "fpu", "fsgsbase", "fxsr", "fxsr_opt", "ht", "hw_pstate", "ibpb", "ibrs", "ibs", "irperf", "lahf_lm", "lbrv", "lm", "mca", "mce", "misalignsse", "mmx", "mmxext", "monitor", "movbe", "msr", "mtrr", "nonstop_tsc", "nopl", "npt", "nrip_save", "nx", "osvw", "overflow_recov", "pae", "pat", "pausefilter", "pclmulqdq", "pdpe1gb", "perfctr_core", "perfctr_l2", "perfctr_nb", "pfthreshold", "pge", "pni", "popcnt", "pse", "pse36", "rdrand", "rdseed", "rdt_a", "rdtscp", "rep_good", "retpoline_amd", "sep", "sha_ni", "skinit", "smap", "smca", "sme", "smep", "ssbd", "sse", "sse2", "sse4_1", "sse4_2", "sse4a", "ssse3", "stibp", "succor", "svm", "svm_lock", "syscall", "tce", "topoext", "tsc", "tsc_scale", "umip", "v_vmsave_vmload", "vgif", "vmcb_clean", "vme", "vmmcall", "wdt", "x2apic", "xgetbv1", "xsave", "xsavec", "xsaveerptr", "xsaveopt",]
+l3_cache_size = 524288
+l2_cache_size = 524288
+l1_data_cache_size = 32768
+l1_instruction_cache_size = 32768
+
+["numpy copy (small)"]
+"mean (s)" = 1.0323976831776755e-5
+"std (s)" = 5.86386512804345e-6
+"memory size (MB)" = 0.25
+"copy speed (GB/s)" = 23.647924533164943
+
+["numpy copy (large)"]
+"mean (s)" = 0.008405480932976519
+"std (s)" = 1.4306866462989355e-5
+"memory size (MB)" = 128.0
+"copy speed (GB/s)" = 14.871249009631082
+
+["numpy float sum (small)"]
+"mean (s)" = 2.7357334537165506e-5
+"std (s)" = 3.808999337446028e-5
+"array size" = 32768
+"sum speed (G element/s)" = 1.197777508458801
+
+["numpy float sum (large)"]
+"mean (s)" = 0.007025738246738911
+"std (s)" = 5.735203823718096e-5
+"array size" = 16777216
+"sum speed (G element/s)" = 2.3879648530583055
+
+["HDF5 IO (small)"]
+"array size (MB)" = 0.262144
+"writing speed (GB/s)" = 0.8806655504653894
+"reading speed (GB/s)" = 1.2727561065423492
+
+["HDF5 IO (large)"]
+"array size (MB)" = 134.217728
+"writing speed (GB/s)" = 3.725971020245128
+"reading speed (GB/s)" = 4.983771874917531
+
+["pybind11 primes"]
+"mean (s)" = 0.5701999227516353
+"std (s)" = 0.0002563596267980546
+"number of primes" = 300000
+method = "pybind11"
+
+["cython primes"]
+"mean (s)" = 0.5713388674892486
+"std (s)" = 0.0003538966903083606
+"number of primes" = 300000
+method = "cython"
+
+["numba primes"]
+"mean (s)" = 0.5713216248899698
+"std (s)" = 0.00013364343232146348
+"number of primes" = 300000
+method = "numba"
