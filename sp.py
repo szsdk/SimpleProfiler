@@ -134,7 +134,7 @@ def sort_stat(nodes, stat, sort_by=None):
 
 @click.command()
 @click.argument("results", nargs=-1)
-@click.option("--highlight", default="")
+@click.option("--highlight", default="_NONE_")
 def stat(results, highlight):
     rs = [toml.load(r) for r in results]
     no_stats = {"cpu", "system", "cuda runtime"}
