@@ -1,101 +1,45 @@
-from pathlib import Path
-import tempfile
 import logging
-from datetime import datetime
+import math
 
 from rich.logging import RichHandler
 from rich.console import Console
 from rich.syntax import Syntax
-import platform
-import numpy as np
+from rich.style import Style
+from rich.table import Table
+
+
 import toml
 import click
 
-import utils
-
-logging.basicConfig(level="INFO",
-                    format="%(message)s",
-                    datefmt="[%X]",
-                    handlers=[RichHandler()])
 
 
-def cpu_info():
-    try:
-        import cpuinfo
-    except ImportError:
-        logging.warning("Cannot import cpuinfo.")
-        return
-    return cpuinfo.get_cpu_info()
+logging.basicConfig(
+    level="INFO", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
+)
+
+_to_super = dict(zip("0123456789-", "⁰¹²³⁴⁵⁶⁷⁸⁹⁻"))
 
 
-def system_info():
-    uname = platform.uname()
-    return {
-        "time": datetime.now(),
-        "system": uname.system,
-        "node Name": uname.node,
-        "release": uname.release,
-        "version": uname.version,
-        "machine": uname.machine,
-        "processor": uname.processor,
-    }
+def pretty_float(f: float) -> str:
+    """
+    Parameters
+    ----------
+    f : float
+        The input float number.
 
-
-def np_copy(nbytes):
-    a = utils.rand_array(nbytes)
-    b = a.copy()
-    info = utils.timeit(lambda: np.copyto(b, a), n=7)
-    info["memory size (MB)"] = a.nbytes / (1 << 20)
-    info["copy speed (GB/s)"] = a.nbytes / (1 << 30) / info["mean (s)"]
-    return info
-
-
-def np_float_sum(nbytes):
-    a = utils.rand_array(nbytes)
-    info = utils.timeit(lambda: np.sum(a), n=7)
-    info["array size"] = len(a)
-    info["sum speed (G element/s)"] = len(a) * 1e-9 / info["mean (s)"]
-    return info
-
-
-def h5_IO(nbytes):
-    try:
-        import h5py
-    except ImportError:
-        logging.warning("Cannot import h5py")
-        return
-    a = utils.rand_array(nbytes)
-    result = {"array size (MB)": nbytes * 1e-6}
-    with tempfile.NamedTemporaryFile(dir=Path(), suffix=".h5") as f:
-        with h5py.File(f.name, "w") as fp:
-            info = utils.timeit(
-                lambda: fp.create_dataset(utils.rand_str(), data=a), n=10)
-        result["writing speed (GB/s)"] = nbytes * 1e-9 / info["mean (s)"]
-        with h5py.File(f.name, "r") as fp:
-            keys = iter(fp.keys())
-            info = utils.timeit(lambda: fp[next(keys)][...], n=10)
-        result["reading speed (GB/s)"] = nbytes * 1e-9 / info["mean (s)"]
-    return result
-
-
-def prime_benchmark(nb_primes, method: str):
-    try:
-        if method == "pybind11":
-            from sci_benchmark.pybind11_func import primes
-        elif method == "cython":
-            from sci_benchmark.cython_func import primes
-        elif method == "numba":
-            from sci_benchmark.numba_func import primes
-
-            primes(20)  # warmup
-    except ImportError:
-        logging.warning(f"Cannot import sci_benchmark {method}")
-        return
-
-    info = utils.timeit(lambda: primes(nb_primes))
-    info["number of primes"] = nb_primes
-    info["method"] = method
-    return info
+    Returns
+    -------
+    s : str
+        A string in the form of `f"{m:.4f} × 10{s_exp}"` for a too large or too small `f`.
+    """
+    if f == 0:
+        return "0"
+    exponet = int(math.floor(math.log10(f)))
+    if -2 < exponet <= 3:
+        return f"{f:.4f}"
+    m = f * 10 ** (-exponet)
+    s_exp = "".join([_to_super[i] for i in str(exponet)])
+    return f"{m:.4f} × 10{s_exp}"
 
 
 def cuda_benchmark():
@@ -111,6 +55,7 @@ def cuda_benchmark():
         return {}
 
     import sp_cuda as scu
+
     info = dict()
     logging.info("cuda runtime")
     info["cuda runtime"] = scu.get_cuda_runtime()
@@ -132,36 +77,109 @@ def cuda_benchmark():
     return info
 
 
+def cpu_benchmark():
+    import sp_cpu as scp
+
+    info = dict()
+    info["system"] = scp.system_info()
+    logging.info("system information")
+    info["cpu"] = scp.cpu_info()
+    logging.info("cpu information")
+    logging.info("numpy array (small) in memory copy")
+    info["numpy copy (small)"] = scp.np_copy(1 << 18)
+    logging.info("numpy array (large) in memory copy")
+    info["numpy copy (large)"] = scp.np_copy(1 << 27)
+    logging.info("sum of a samll numpy float array")
+    info["numpy float sum (small)"] = scp.np_float_sum(1 << 18)
+    logging.info("sum of a large numpy float array")
+    info["numpy float sum (large)"] = scp.np_float_sum(1 << 27)
+    logging.info("HDF5 IO (small)")
+    info["HDF5 IO (small)"] = scp.h5_IO(1 << 18)
+    logging.info("HDF5 IO (large)")
+    info["HDF5 IO (large)"] = scp.h5_IO(1 << 27)
+    logging.info("primes (pybind11)")
+    info["pybind11 primes"] = scp.prime_benchmark(300000, "pybind11")
+    logging.info("primes (cython)")
+    info["cython primes"] = scp.prime_benchmark(300000, "cython")
+    logging.info("primes (numba)")
+    info["numba primes"] = scp.prime_benchmark(300000, "numba")
+    return info
+
+
+def concat_dict(ds):
+    ans = {k: [] for k in ds[0].keys()}
+    for d in ds:
+        for k, v in ans.items():
+            v.append(d[k])
+    return ans
+
+
+def sort_stat(nodes, stat, sort_by=None):
+    info = dict()
+    table = {}
+    for k, v in stat.items():
+        if len(set(v)) == 1:
+            info[k] = v[0]
+        else:
+            table[k] = v
+    if sort_by is None:
+        table["node"] = nodes
+    else:
+        sb = table[sort_by]
+        table["node"] = [i for _, i in sorted(zip(sb, nodes))]
+        for k, v in table.items():
+            table[k] = [i for _, i in sorted(zip(sb, v))]
+    return info, table
+
+
+@click.command()
+@click.argument("results", nargs=-1)
+@click.option("--highlight", default="")
+def stat(results, highlight):
+    rs = [toml.load(r) for r in results]
+    no_stats = {"cpu", "system", "cuda runtime"}
+    keys = set(sum([list(r.keys()) for r in rs], []))
+    keys -= no_stats
+
+    # output_str = toml.dumps(result)
+    console = Console()
+    for k in sorted(keys):
+        nodes = [r["system"]["node Name"] for r in rs if k in r]
+        stat = concat_dict([r[k] for r in rs if k in r])
+
+        sort_by = "mean (s)" if "mean (s)" in stat else None
+        info, table = sort_stat(
+            nodes, stat, sort_by=sort_by
+        )
+        console.print(
+            Syntax(toml.dumps({k: info}), "toml", background_color="default"), end=""
+        )
+
+        tab = Table()
+        for k in table.keys():
+            # if k == "node":
+            #     width = None
+            # else:
+            #     width = max(len(k), 4)
+            width = None
+            tab.add_column(k, width=width)
+        for l in zip(*list(table.values())):
+            if  highlight in l[-1]:
+                style = Style(color="rgb(240,0,0)")
+            else:
+                style = Style.null()
+            tab.add_row(*[pretty_float(i) if isinstance(i, float) else str(i) for i in l], style=style)
+        console.print(tab)
+
 @click.command()
 @click.option("--no-log", is_flag=True, default=True)
 @click.option("--output", "-O", type=str, default="")
 def main(no_log, output):
     if not no_log:
         logging.disable()
-    result = dict()
-    result["system"] = system_info()
-    logging.info("system information")
-    result["cpu"] = cpu_info()
-    logging.info("cpu information")
-    logging.info("numpy array (small) in memory copy")
-    result["numpy copy (small)"] = np_copy(1 << 18)
-    logging.info("numpy array (large) in memory copy")
-    result["numpy copy (large)"] = np_copy(1 << 27)
-    logging.info("sum of a samll numpy float array")
-    result["numpy float sum (small)"] = np_float_sum(1 << 18)
-    logging.info("sum of a large numpy float array")
-    result["numpy float sum (large)"] = np_float_sum(1 << 27)
-    logging.info("HDF5 IO (small)")
-    result["HDF5 IO (small)"] = h5_IO(1 << 18)
-    logging.info("HDF5 IO (large)")
-    result["HDF5 IO (large)"] = h5_IO(1 << 27)
-    logging.info("primes (pybind11)")
-    result["pybind11 primes"] = prime_benchmark(300000, "pybind11")
-    logging.info("primes (cython)")
-    result["cython primes"] = prime_benchmark(300000, "cython")
-    logging.info("primes (numba)")
-    result["numba primes"] = prime_benchmark(300000, "numba")
 
+    result = dict()
+    result.update(cpu_benchmark())
     result.update(cuda_benchmark())
 
     output_str = toml.dumps(result)
@@ -175,4 +193,5 @@ def main(no_log, output):
 
 
 if __name__ == "__main__":
-    main()
+    stat()
+    # main()
