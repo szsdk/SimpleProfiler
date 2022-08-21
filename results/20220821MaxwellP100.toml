@@ -1,0 +1,165 @@
+[system]
+time = 2022-08-21T11:30:01.646094
+system = "Linux"
+"node Name" = "max-wng008.desy.de"
+release = "3.10.0-1160.71.1.el7.x86_64"
+version = "#1 SMP Tue Jun 28 15:37:28 UTC 2022"
+machine = "x86_64"
+processor = "x86_64"
+
+[cpu]
+python_version = "3.8.13.final.0 (64 bit)"
+cpuinfo_version = [ 8, 0, 0,]
+cpuinfo_version_string = "8.0.0"
+arch = "X86_64"
+bits = 64
+count = 40
+arch_string_raw = "x86_64"
+vendor_id_raw = "GenuineIntel"
+brand_raw = "Intel(R) Xeon(R) CPU E5-2640 v4 @ 2.40GHz"
+hz_advertised_friendly = "2.4000 GHz"
+hz_actual_friendly = "2.6001 GHz"
+hz_advertised = [ 2400000000, 0,]
+hz_actual = [ 2600097000, 0,]
+stepping = 1
+model = 79
+family = 6
+flags = [ "3dnowprefetch", "abm", "acpi", "adx", "aes", "aperfmperf", "apic", "arat", "arch_perfmon", "avx", "avx2", "bmi1", "bmi2", "bts", "cat_l3", "cdp_l3", "clflush", "cmov", "constant_tsc", "cqm", "cqm_llc", "cqm_mbm_local", "cqm_mbm_total", "cqm_occup_llc", "cx16", "cx8", "dca", "de", "ds_cpl", "dtes64", "dtherm", "dts", "eagerfpu", "epb", "ept", "erms", "est", "f16c", "flexpriority", "fma", "fpu", "fsgsbase", "fxsr", "hle", "ht", "ida", "intel_ppin", "intel_pt", "invpcid", "invpcid_single", "lahf_lm", "lm", "mca", "mce", "mmx", "monitor", "movbe", "msr", "mtrr", "nonstop_tsc", "nopl", "nx", "pae", "pat", "pbe", "pcid", "pclmulqdq", "pdcm", "pdpe1gb", "pebs", "pge", "pln", "pni", "popcnt", "pse", "pse36", "pts", "rdrand", "rdseed", "rdt_a", "rdtscp", "rep_good", "rtm", "sdbg", "sep", "smap", "smep", "smx", "ss", "sse", "sse2", "sse4_1", "sse4_2", "ssse3", "syscall", "tm", "tm2", "tpr_shadow", "tsc", "tsc_adjust", "tsc_deadline_timer", "vme", "vmx", "vnmi", "vpid", "x2apic", "xsave", "xsaveopt", "xtopology", "xtpr",]
+l3_cache_size = 26214400
+l2_cache_size = 262144
+l1_data_cache_size = 32768
+l1_instruction_cache_size = 32768
+
+["numpy copy (small)"]
+"mean (s)" = 2.2487182702336994e-5
+"std (s)" = 4.50271535070372e-6
+"memory size (MB)" = 0.25
+"copy speed (GB/s)" = 10.856879148966382
+
+["numpy copy (large)"]
+"mean (s)" = 0.016275923566094468
+"std (s)" = 3.1716319233651144e-5
+"memory size (MB)" = 128.0
+"copy speed (GB/s)" = 7.68005572724588
+
+["numpy float sum (small)"]
+"mean (s)" = 3.2549457890646795e-5
+"std (s)" = 2.3451671429775232e-5
+"array size" = 32768
+"sum speed (G element/s)" = 1.0067141551201073
+
+["numpy float sum (large)"]
+"mean (s)" = 0.012277947339628423
+"std (s)" = 0.00031173649817305523
+"array size" = 16777216
+"sum speed (G element/s)" = 1.3664512101179727
+
+["HDF5 IO (small)"]
+"array size (MB)" = 0.262144
+"writing speed (GB/s)" = 0.7114035020103194
+"reading speed (GB/s)" = 0.8494037099780041
+
+["HDF5 IO (large)"]
+"array size (MB)" = 134.217728
+"writing speed (GB/s)" = 2.7289721133471585
+"reading speed (GB/s)" = 2.4618767076783126
+
+["pybind11 primes"]
+"mean (s)" = 0.3599792727269232
+"std (s)" = 0.001074474552334588
+"number of primes" = 300000
+method = "pybind11"
+
+["cython primes"]
+"mean (s)" = 0.330981464497745
+"std (s)" = 0.0011963808338000769
+"number of primes" = 300000
+method = "cython"
+
+["numba primes"]
+"mean (s)" = 0.6397687449119985
+"std (s)" = 0.00031293551713879123
+"number of primes" = 300000
+method = "numba"
+
+["cuda runtime"]
+OS = "Linux-3.10.0-1160.71.1.el7.x86_64-x86_64-with-glibc2.10"
+"Python Version" = "3.8.13"
+"CuPy Version" = "11.0.0"
+"CuPy Platform" = "NVIDIA CUDA"
+"NumPy Version" = "1.21.5"
+"SciPy Version" = "1.8.0"
+"Cython Build Version" = "0.29.24"
+"Cython Runtime Version" = "0.29.28"
+"CUDA Root" = "/usr/local/cuda"
+"nvcc PATH" = "/usr/local/cuda/bin/nvcc"
+"CUDA Build Version" = "11070"
+"CUDA Driver Version" = "11070"
+"CUDA Runtime Version" = "11030"
+"cuBLAS Version" = "11501"
+"cuFFT Version" = "10402"
+"cuRAND Version" = "10204"
+"cuSOLVER Version" = "(11, 1, 2)"
+"cuSPARSE Version" = "11600"
+"NVRTC Version" = "(11, 3)"
+"Thrust Version" = "101500"
+"CUB Build Version" = "101500"
+"Jitify Build Version" = "4a37de0"
+"cuDNN Build Version" = "None"
+"cuDNN Version" = "None"
+"NCCL Build Version" = "None"
+"NCCL Runtime Version" = "None"
+"cuTENSOR Version" = "None"
+"cuSPARSELt Build Version" = "None"
+"Device 0 Name" = "Tesla P100-SXM2-16GB"
+"Device 0 Compute Capability" = "60"
+"Device 0 PCI Bus ID" = "0000:84:00.0"
+"Device 1 Name" = "Tesla P100-SXM2-16GB"
+"Device 1 Compute Capability" = "60"
+"Device 1 PCI Bus ID" = "0000:85:00.0"
+
+["cupy copy to a device"]
+"mean (s)" = 0.06603168496595961
+"std (s)" = 0.052668055105144315
+"memory size" = "256.0 MB"
+"copy speed (GB/s)" = 3.786061193635737
+
+["cupy copy from a device"]
+"mean (s)" = 0.09528035404426712
+"std (s)" = 0.00010820616004191963
+"memory size" = "256.0 MB"
+"copy speed (GB/s)" = 2.6238357582492857
+
+["cupy copy in a device"]
+"mean (s)" = 0.004192892195922988
+"std (s)" = 0.00765327603550962
+"memory size" = "256.0 MB"
+"copy speed (GB/s)" = 59.624714473482214
+
+["cupy copy between devices"]
+"mean (s)" = 0.01459416068558182
+"std (s)" = 0.00014684411949006615
+"memory size" = "256.0 MB"
+"copy speed (GB/s)" = 17.13013892241062
+
+["cupy sum (small)"]
+"array size (GB)" = 6.103515625e-5
+"mean (s)" = 6.863834070307868e-5
+"std (s)" = 1.55443287071024e-5
+"speed (GB/s)" = 0.8892283179459545
+
+["cupy sum (large)"]
+"array size (GB)" = 0.25
+"mean (s)" = 0.003702940818454538
+"std (s)" = 0.007840039921800048
+"speed (GB/s)" = 67.51390644810256
+
+["cupy svd (small)"]
+"array size" = 16
+"mean (s)" = 0.0009328005835413933
+"std (s)" = 5.0734159391452774e-5
+
+["cupy svd (large)"]
+"array size" = 512
+"mean (s)" = 0.11865460367075034
+"std (s)" = 0.00015084645155708263
