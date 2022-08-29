@@ -1,0 +1,85 @@
+[system]
+time = 2022-08-29T10:30:29.238681
+system = "Linux"
+"node Name" = "cfelm-pcx31503.desy.de"
+release = "5.4.0-122-generic"
+version = "#138-Ubuntu SMP Wed Jun 22 15:00:31 UTC 2022"
+machine = "x86_64"
+processor = "x86_64"
+
+[cpu]
+python_version = "3.9.13.final.0 (64 bit)"
+cpuinfo_version = [ 8, 0, 0,]
+cpuinfo_version_string = "8.0.0"
+arch = "X86_64"
+bits = 64
+count = 8
+arch_string_raw = "x86_64"
+vendor_id_raw = "GenuineIntel"
+brand_raw = "Intel(R) Core(TM) i7-9700 CPU @ 3.00GHz"
+hz_advertised_friendly = "3.0000 GHz"
+hz_actual_friendly = "4.2461 GHz"
+hz_advertised = [ 3000000000, 0,]
+hz_actual = [ 4246098000, 0,]
+stepping = 13
+model = 158
+family = 6
+flags = [ "3dnowprefetch", "abm", "acpi", "adx", "aes", "aperfmperf", "apic", "arat", "arch_capabilities", "arch_perfmon", "art", "avx", "avx2", "bmi1", "bmi2", "bts", "clflush", "clflushopt", "cmov", "constant_tsc", "cpuid", "cpuid_fault", "cx16", "cx8", "de", "ds_cpl", "dtes64", "dtherm", "dts", "epb", "ept", "ept_ad", "erms", "est", "f16c", "flexpriority", "flush_l1d", "fma", "fpu", "fsgsbase", "fxsr", "ht", "hwp", "hwp_act_window", "hwp_epp", "hwp_notify", "ibpb", "ibrs", "ibrs_enhanced", "ida", "intel_pt", "invpcid", "invpcid_single", "lahf_lm", "lm", "mca", "mce", "md_clear", "mmx", "monitor", "movbe", "mpx", "msr", "mtrr", "nonstop_tsc", "nopl", "nx", "osxsave", "pae", "pat", "pbe", "pcid", "pclmulqdq", "pdcm", "pdpe1gb", "pebs", "pge", "pln", "pni", "popcnt", "pse", "pse36", "pts", "rdrand", "rdrnd", "rdseed", "rdtscp", "rep_good", "sdbg", "sep", "sgx", "sgx_lc", "smap", "smep", "smx", "ss", "ssbd", "sse", "sse2", "sse4_1", "sse4_2", "ssse3", "stibp", "syscall", "tm", "tm2", "tpr_shadow", "tsc", "tsc_adjust", "tsc_deadline_timer", "tscdeadline", "vme", "vmx", "vnmi", "vpid", "x2apic", "xgetbv1", "xsave", "xsavec", "xsaveopt", "xsaves", "xtopology", "xtpr",]
+l3_cache_size = 12582912
+l2_cache_size = "2 MiB"
+l1_data_cache_size = "256 KiB"
+l1_instruction_cache_size = "256 KiB"
+l2_cache_line_size = 256
+l2_cache_associativity = 6
+
+["numpy copy (small)"]
+"mean (s)" = 9.088876790234021e-6
+"std (s)" = 2.569373180857862e-6
+"memory size (MB)" = 0.25
+"copy speed (GB/s)" = 26.861473715028087
+
+["numpy copy (large)"]
+"mean (s)" = 0.018771626155025194
+"std (s)" = 0.0015613926167243506
+"memory size (MB)" = 128.0
+"copy speed (GB/s)" = 6.658986225683879
+
+["numpy float sum (small)"]
+"mean (s)" = 2.8344569727778435e-5
+"std (s)" = 2.6475154523213618e-5
+"array size" = 32768
+"sum speed (G element/s)" = 1.1560591786964574
+
+["numpy float sum (large)"]
+"mean (s)" = 0.01018838956952095
+"std (s)" = 0.002578440526430848
+"array size" = 16777216
+"sum speed (G element/s)" = 1.6466994990248347
+
+["HDF5 IO (small)"]
+"array size (MB)" = 0.262144
+"writing speed (GB/s)" = 0.8507146463339055
+"reading speed (GB/s)" = 1.046684130469921
+
+["HDF5 IO (large)"]
+"array size (MB)" = 134.217728
+"writing speed (GB/s)" = 2.4707827208684465
+"reading speed (GB/s)" = 2.8245141386879933
+
+["pybind11 primes"]
+"mean (s)" = 0.2179353100946173
+"std (s)" = 0.002151685418137178
+"number of primes" = 300000
+method = "pybind11"
+
+["cython primes"]
+"mean (s)" = 0.21584256754722447
+"std (s)" = 0.002151177042340639
+"number of primes" = 300000
+method = "cython"
+
+["numba primes"]
+"mean (s)" = 0.31722196328919383
+"std (s)" = 0.000569231702929185
+"number of primes" = 300000
+method = "numba"
