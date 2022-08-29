@@ -125,9 +125,9 @@ def sort_stat(nodes, stat, sort_by=None):
         table["node"] = nodes
     else:
         sb = table[sort_by]
-        table["node"] = [i for _, i in sorted(zip(sb, nodes))]
         for k, v in table.items():
             table[k] = [i for _, i in sorted(zip(sb, v))]
+        table["node"] = [i for _, i in sorted(zip(sb, nodes))]
     return info, table
 
 
@@ -159,10 +159,6 @@ def stat(results, highlight):
 
         tab = Table()
         for k in table.keys():
-            # if k == "node":
-            #     width = None
-            # else:
-            #     width = max(len(k), 4)
             width = None
             tab.add_column(k, width=width)
         for l in zip(*list(table.values())):
