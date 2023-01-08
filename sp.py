@@ -11,7 +11,6 @@ import click
 from click_default_group import DefaultGroup
 
 
-
 logging.basicConfig(
     level="INFO", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
 )
@@ -113,21 +112,24 @@ def concat_dict(ds):
     return ans
 
 
-def sort_stat(nodes, stat, sort_by=None):
+def sort_stat(stat, table0, sort_by=None):
     info = dict()
-    table = {}
+    table = table0.copy()
     for k, v in stat.items():
         if len(set(v)) == 1:
             info[k] = v[0]
         else:
             table[k] = v
-    if sort_by is None:
-        table["node"] = nodes
-    else:
+    # if sort_by is None:
+    #     table.update(extra)
+        # table["node"] = nodes
+    # else:
+    if sort_by is not None:
         sb = table[sort_by]
         for k, v in table.items():
             table[k] = [i for _, i in sorted(zip(sb, v))]
-        table["node"] = [i for _, i in sorted(zip(sb, nodes))]
+        # for k, v in extra.items():
+        #     table[k] = [i for _, i in sorted(zip(sb, v))]
     return info, table
 
 
@@ -148,11 +150,14 @@ def stat(results, highlight):
     # output_str = toml.dumps(result)
     console = Console()
     for k in sorted(keys):
-        nodes = [r["system"]["node Name"] for r in rs if k in r]
         stat = concat_dict([r[k] for r in rs if k in r])
 
         sort_by = "mean (s)" if "mean (s)" in stat else None
-        info, table = sort_stat(nodes, stat, sort_by=sort_by)
+        table0 = {
+            "time": [r["system"]["time"] for r in rs if k in r],
+            "node": [r["system"]["node Name"] for r in rs if k in r]
+        }
+        info, table = sort_stat(stat, table0, sort_by=sort_by)
         console.print(
             Syntax(toml.dumps({k: info}), "toml", background_color="default"), end=""
         )
@@ -162,7 +167,7 @@ def stat(results, highlight):
             width = None
             tab.add_column(k, width=width)
         for l in zip(*list(table.values())):
-            if highlight in l[-1]:
+            if highlight in l[1]:
                 style = Style(color="rgb(240,0,0)")
             else:
                 style = Style.null()
