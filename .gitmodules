@@ -1,3 +1,6 @@
 [submodule "sci_benchmark/pybind11"]
 	path = sci_benchmark/pybind11
 	url = https://github.com/pybind/pybind11
+[submodule "sci_benchmark/nanobind"]
+	path = sci_benchmark/nanobind
+	url = https://github.com/wjakob/nanobind

@@ -1,0 +1,91 @@
+[system]
+time = 2023-07-15T08:51:00.962978
+system = "Linux"
+"node Name" = "archlinux"
+release = "6.4.3-arch1-1"
+version = "#1 SMP PREEMPT_DYNAMIC Tue, 11 Jul 2023 05:13:39 +0000"
+machine = "x86_64"
+processor = ""
+
+[cpu]
+python_version = "3.11.3.final.0 (64 bit)"
+cpuinfo_version = [ 9, 0, 0,]
+cpuinfo_version_string = "9.0.0"
+arch = "X86_64"
+bits = 64
+count = 8
+arch_string_raw = "x86_64"
+vendor_id_raw = "GenuineIntel"
+brand_raw = "11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz"
+hz_advertised_friendly = "3.0000 GHz"
+hz_actual_friendly = "4.6295 GHz"
+hz_advertised = [ 3000000000, 0,]
+hz_actual = [ 4629512000, 0,]
+stepping = 1
+model = 140
+family = 6
+flags = [ "3dnowprefetch", "abm", "acpi", "adx", "aes", "aperfmperf", "apic", "arat", "arch_capabilities", "arch_perfmon", "art", "avx", "avx2", "avx512_bitalg", "avx512_vbmi2", "avx512_vnni", "avx512_vp2intersect", "avx512_vpopcntdq", "avx512bitalg", "avx512bw", "avx512cd", "avx512dq", "avx512f", "avx512ifma", "avx512vbmi", "avx512vbmi2", "avx512vl", "avx512vnni", "avx512vpopcntdq", "bmi1", "bmi2", "bts", "cat_l2", "cdp_l2", "clflush", "clflushopt", "clwb", "cmov", "constant_tsc", "cpuid", "cpuid_fault", "cx16", "cx8", "de", "ds_cpl", "dtes64", "dtherm", "dts", "epb", "ept", "ept_ad", "erms", "est", "f16c", "flexpriority", "flush_l1d", "fma", "fpu", "fsgsbase", "fsrm", "fxsr", "gfni", "ht", "hwp", "hwp_act_window", "hwp_epp", "hwp_notify", "hwp_pkg_req", "ibpb", "ibrs", "ibrs_enhanced", "ibt", "ida", "intel_pt", "invpcid", "invpcid_single", "lahf_lm", "lm", "mca", "mce", "md_clear", "mmx", "monitor", "movbe", "movdir64b", "movdiri", "msr", "mtrr", "nonstop_tsc", "nopl", "nx", "ospke", "osxsave", "pae", "pat", "pbe", "pcid", "pclmulqdq", "pdcm", "pdpe1gb", "pebs", "pge", "pku", "pln", "pni", "popcnt", "pqe", "pse", "pse36", "pts", "rdpid", "rdrand", "rdrnd", "rdseed", "rdt_a", "rdtscp", "rep_good", "sdbg", "sep", "sha", "sha_ni", "smap", "smep", "smx", "split_lock_detect", "ss", "ssbd", "sse", "sse2", "sse4_1", "sse4_2", "ssse3", "stibp", "syscall", "tm", "tm2", "tme", "tpr_shadow", "tsc", "tsc_adjust", "tsc_deadline_timer", "tsc_known_freq", "tscdeadline", "umip", "vaes", "vme", "vmx", "vnmi", "vpclmulqdq", "vpid", "x2apic", "xgetbv1", "xsave", "xsavec", "xsaveopt", "xsaves", "xtopology", "xtpr",]
+l3_cache_size = 12582912
+l2_cache_size = 5242880
+l1_data_cache_size = 196608
+l1_instruction_cache_size = 131072
+l2_cache_line_size = 256
+l2_cache_associativity = 7
+
+["numpy copy (small)"]
+"mean (s)" = 5.649714564372386e-6
+"std (s)" = 1.1364385107113027e-6
+"memory size (MB)" = 0.25
+"copy speed (GB/s)" = 43.21291318672504
+
+["numpy copy (large)"]
+"mean (s)" = 0.005901558428636885
+"std (s)" = 1.4670027916518803e-5
+"memory size (MB)" = 128.0
+"copy speed (GB/s)" = 21.180845959847918
+
+["numpy float sum (small)"]
+"mean (s)" = 1.2102141876571945e-5
+"std (s)" = 1.0415420800354185e-5
+"array size" = 32768
+"sum speed (G element/s)" = 2.7076198853224707
+
+["numpy float sum (large)"]
+"mean (s)" = 0.008091794139805384
+"std (s)" = 0.0003217627529470395
+"array size" = 16777216
+"sum speed (G element/s)" = 2.0733616933566124
+
+["HDF5 IO (small)"]
+"array size (MB)" = 0.262144
+"writing speed (GB/s)" = 1.1214539028447958
+"reading speed (GB/s)" = 1.5677268752527505
+
+["HDF5 IO (large)"]
+"array size (MB)" = 134.217728
+"writing speed (GB/s)" = 2.9193691290188415
+"reading speed (GB/s)" = 5.0702200915362
+
+["pybind11 primes"]
+"mean (s)" = 0.13474301769965677
+"std (s)" = 0.0019222018899677435
+"number of primes" = 300000
+method = "pybind11"
+
+["nanobind primes"]
+"mean (s)" = 0.1315859886999533
+"std (s)" = 0.0013535197141383041
+"number of primes" = 300000
+method = "nanobind"
+
+["cython primes"]
+"mean (s)" = 0.13052723499858984
+"std (s)" = 0.000558649014585654
+"number of primes" = 300000
+method = "cython"
+
+["numba primes"]
+"mean (s)" = 0.1496678459996474
+"std (s)" = 0.0007409640489861479
+"number of primes" = 300000
+method = "numba"

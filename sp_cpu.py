@@ -71,6 +71,8 @@ def prime_benchmark(nb_primes, method: str):
     try:
         if method == "pybind11":
             from sci_benchmark.pybind11_func import primes
+        if method == "nanobind":
+            from sci_benchmark.nanobind_func import primes
         elif method == "cython":
             from sci_benchmark.cython_func import primes
         elif method == "numba":

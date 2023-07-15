@@ -97,6 +97,8 @@ def cpu_benchmark():
     info["HDF5 IO (large)"] = scp.h5_IO(1 << 27)
     logging.info("primes (pybind11)")
     info["pybind11 primes"] = scp.prime_benchmark(300000, "pybind11")
+    logging.info("primes (nanobind)")
+    info["nanobind primes"] = scp.prime_benchmark(300000, "nanobind")
     logging.info("primes (cython)")
     info["cython primes"] = scp.prime_benchmark(300000, "cython")
     logging.info("primes (numba)")
@@ -124,7 +126,7 @@ def sort_stat(stat, table0, sort_by=None):
     #     table.update(extra)
         # table["node"] = nodes
     # else:
-    if sort_by is not None:
+    if (sort_by is not None) and (sort_by in table):
         sb = table[sort_by]
         for k, v in table.items():
             table[k] = [i for _, i in sorted(zip(sb, v))]
